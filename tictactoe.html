@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<head>
+<style type="text/css">
+	.layer {
+		float:left;
+	}
+	.header {
+		clear:both;
+	}	
+	.square {
+		width: 200px ;
+		height: 200px ;
+		border: 1px solid black ;
+		background-color: #ffffff;
+	}	
+</style>
+
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>-->
+<script src="jquery.js" type="text/javascript"></script>
+
+</head>
+<body>
+	<script src="Tile.js" type="text/javascript"></script>
+	<script src="Line.js" type="text/javascript"></script>
+	<script src="Player.js" type="text/javascript"></script>
+	<script src="Turn.js" type="text/javascript"></script>
+	
+	<script>	
+		$(document).ready(function(){
+			/* define globals */
+			
+			global = "";
+			players = new Array();
+			tiles = new Array();
+			lines = new Array();
+			turns = new Array();
+			/* end globals */
+			
+			players.push(new Player("player 1","red") );
+			players.push(new Player("player 2","blue") );
+			
+			tiles.push(new Tile('left','top'));
+			tiles.push(new Tile('center','top'));
+			tiles.push(new Tile('right','top'));
+			tiles.push(new Tile('left','middle'));
+			tiles.push(new Tile('center','middle'));
+			tiles.push(new Tile('right','middle'));
+			tiles.push(new Tile('left','bottom'));
+			tiles.push(new Tile('center','bottom'));
+			tiles.push(new Tile('right','bottom'));
+			
+			lines.push( new Line('top',tiles,'top',false) );
+			lines.push( new Line('middle',tiles,'middle',false) );
+			lines.push( new Line('bottom',tiles,'bottom',false) );
+			lines.push( new Line('left',tiles,'left',false) );
+			lines.push( new Line('center',tiles,'center',false) );
+			lines.push( new Line('right',tiles,'right',false) );		
+			
+			lines.push( new Line('slash',tiles,'slash',true) );
+			lines.push( new Line('backslash',tiles,'backslash',true) );
+			
+			turns.push( new Turn(1,players[0]) ); //starts the game
+		
+		});
+	</script>
+	
+	<section class="layer" id="turn_banner">
+		blank
+	</section>
+	
+	<section class="layer header">
+		<div class="square top left"></div>
+		<div class="square middle left"></div>
+		<div class="square bottom left"></div>
+	</section>
+	<section class="layer">
+		<div class="square top center"></div>
+		<div class="square middle center"></div>
+		<div class="square bottom center"></div>
+	</section>
+	<section class="layer">
+		<div class="square top right"></div>
+		<div class="square middle right"></div>
+		<div class="square bottom right"></div>
+	</section>
+	
+</body>
+</html>
+
