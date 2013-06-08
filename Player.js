@@ -10,3 +10,8 @@ Player.prototype.getSymbol = function() {
 Player.prototype.getTurnBanner = function(turnNumber) {
 	return 'Turn ' + turnNumber + ': <span style="color:' + this.symbol + ';">' + this.name + "</span>";
 }
+
+Player.prototype.hasWon = function() {
+	alert(this.name + " has won!")
+	window.location.reload();
+}

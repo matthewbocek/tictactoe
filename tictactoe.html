@@ -26,10 +26,8 @@
 	<script src="Turn.js" type="text/javascript"></script>
 	
 	<script>	
-		$(document).ready(function(){
+		$(document).ready( function(){
 			/* define globals */
-			
-			global = "";
 			players = new Array();
 			tiles = new Array();
 			lines = new Array();
@@ -49,6 +47,7 @@
 			tiles.push(new Tile('center','bottom'));
 			tiles.push(new Tile('right','bottom'));
 			
+			/*			
 			lines.push( new Line('top',tiles,'top',false) );
 			lines.push( new Line('middle',tiles,'middle',false) );
 			lines.push( new Line('bottom',tiles,'bottom',false) );
@@ -58,9 +57,18 @@
 			
 			lines.push( new Line('slash',tiles,'slash',true) );
 			lines.push( new Line('backslash',tiles,'backslash',true) );
+			*/
+			
+			lines.push( new Line('top',Array(tiles[0],tiles[1],tiles[2])));
+			lines.push( new Line('middle',Array(tiles[3],tiles[4],tiles[5])));
+			lines.push( new Line('bottom',Array(tiles[6],tiles[7],tiles[8])));
+			lines.push( new Line('left',Array(tiles[0],tiles[3],tiles[6])));
+			lines.push( new Line('center',Array(tiles[1],tiles[4],tiles[7])));
+			lines.push( new Line('right',Array(tiles[2],tiles[5],tiles[8])));
+			lines.push( new Line('slash',Array(tiles[6],tiles[4],tiles[2])));
+			lines.push( new Line('backslash',Array(tiles[8],tiles[4],tiles[0])));
 			
 			turns.push( new Turn(1,players[0]) ); //starts the game
-		
 		});
 	</script>
 	

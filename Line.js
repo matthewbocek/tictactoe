@@ -1,3 +1,4 @@
+/*
 function Line(name,allTiles,filterBy,diagonal){
 	this.name = name;
 	this.contents = new Array();
@@ -38,4 +39,21 @@ function Line(name,allTiles,filterBy,diagonal){
 			}
 		}
 	}
+}
+*/
+
+function Line(name,tiles) {
+	this.name = name;
+	this.contents = tiles;
+}
+
+Line.prototype.checkForWin = function(symbol){
+	for(var i=0;i<this.contents.length;i++) {
+		if (this.contents[i].symbol == symbol) {
+			continue;
+		} else {
+			return false;
+		}
+	}
+	return true;
 }

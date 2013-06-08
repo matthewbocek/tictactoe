@@ -15,7 +15,7 @@ function Turn(arg1,player) {
 		
 		for(var i=0;i<tiles.length;i++)
 		{
-			console.log(i+" "+ tiles[i].x+" "+tiles[i].y+": "+tiles[i].taken);			
+			//console.log(i+" "+ tiles[i].x+" "+tiles[i].y+": "+tiles[i].taken);			
 		}		
 	}
 	this.updateTurnBanner('turn_banner');
@@ -24,12 +24,11 @@ function Turn(arg1,player) {
 
 Turn.prototype.setHandler = function() {
 	//console.log('set handler');
+	$("div").off("click");
 	$("div").on("click",this.identifyTile);
 }
 
-Turn.prototype.identifyTile = function() {	
-	$("div").off("click"); //maybe if no one tries to re-capture
-	
+Turn.prototype.identifyTile = function() {		
 	var selectedTile = $(this).attr('class');
 	var selectedDiv = $(this);
 	var symbol = turns[turns.length-1].player.getSymbol(); //lost track of the current turn, use turns[turns.length-1] to get it back
@@ -41,17 +40,23 @@ Turn.prototype.identifyTile = function() {
 			break;
 		}
 	}
-	console.log("matchedTile =" + matchedTile.x + " " + matchedTile.y);
-	if	( matchedTile.claim(symbol) ){ 
-		console.log("making a new turn");
-		selectedDiv.css("background-color",symbol)
-		//check for win condition
-		turns.push = new Turn(turns[turns.length-1]); //advances to next turn
-	} else {
-		//do nothing
-	}
+	//console.log("matchedTile =" + matchedTile.x + " " + matchedTile.y);
+	
+	matchedTile.claim(symbol,selectedDiv);
 }
 
 Turn.prototype.updateTurnBanner = function(htmlId) {
 	$( '#' + htmlId ).html( this.player.getTurnBanner(this.number) );
+}
+
+Turn.prototype.advanceTurn = function() {
+	console.log("advancing from turn " +  this.number)
+	for(var i=0;i<lines.length;i++) {
+		console.log("checking line " + i);
+		if (lines[i].checkForWin(this.player.symbol)) {
+			this.player.hasWon();
+			return;
+		}
+	}
+	turns.push( new Turn(this) );
 }
